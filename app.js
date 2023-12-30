@@ -9,6 +9,7 @@ require('./config/connection');
 
 var index = require('./routes/index');
 var estudiantes = require('./routes/estudiantes.routes');
+var usuarios = require('./routes/usuarios.routes');
 
 var app = express();
 
@@ -25,6 +26,7 @@ app.use(cookieParser());
 
 app.use('/', index);
 app.use('/estudiantes', estudiantes);
+app.use('/usuarios', usuarios);
 
 // Middleware para manejar rutas no encontradas y devolver error 404
 app.use((req, res, next) => {
