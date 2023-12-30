@@ -1,9 +1,17 @@
 const express = require('express');
 const router = express.Router();
 const Estudiantes = require('../controllers/estudiantes')
+const checkAutenticacion = require('../controllers/service/jwtAuth');
 
 /* GET Estudiantes */
-router.get('/', function (req, res, next) {
+router.get('/', 
+
+function(req, res, next){
+  roles = ["admin", "editor"];
+  checkAutenticacion(req, res, next, roles);
+},
+
+function (req, res, next) {
   Estudiantes.listar()
     .then((resultado) => {
       res.status(200).json({ "status": 200, "data": resultado })
@@ -14,7 +22,14 @@ router.get('/', function (req, res, next) {
 });
 
 /* POST Estudiantes */
-router.post('/', function (req, res, next) {
+router.post('/', 
+
+function(req, res, next){
+  roles = ["admin"];
+  checkAutenticacion(req, res, next, roles);
+},
+
+function (req, res, next) {
   Estudiantes.agregar(req.body)
     .then((resultado) => {
       res.status(200).json({ status: 200, mensaje: resultado })
@@ -25,7 +40,14 @@ router.post('/', function (req, res, next) {
 })
 
 /* GET Estudiante por ID */
-router.get('/:id', function (req, res, next) {
+router.get('/:id', 
+
+function(req, res, next){
+  roles = ["admin", "editor"];
+  checkAutenticacion(req, res, next, roles);
+},
+
+function (req, res, next) {
   const { id } = req.params
 
   Estudiantes.mostrar(id)
@@ -38,7 +60,14 @@ router.get('/:id', function (req, res, next) {
 });
 
 /* GET Estudiante por Carrera (Nuevo Endpoint) */
-router.get('/carrera/:carrera', function (req, res, next) {
+router.get('/carrera/:carrera', 
+
+function(req, res, next){
+  roles = ["admin", "editor"];
+  checkAutenticacion(req, res, next, roles);
+},
+
+function (req, res, next) {
   const { carrera } = req.params
 
   Estudiantes.mostrarCarrera(carrera)
@@ -51,7 +80,14 @@ router.get('/carrera/:carrera', function (req, res, next) {
 });
 
 /* GET Estudiante por Rango de Edad (Nuevo Endpoint) */
-router.get('/edad/:rangomin/:rangomax', function (req, res, next) {
+router.get('/edad/:rangomin/:rangomax', 
+
+function(req, res, next){
+  roles = ["admin", "editor"];
+  checkAutenticacion(req, res, next, roles);
+},
+
+function (req, res, next) {
   const { rangomin, rangomax } = req.params
 
   Estudiantes.mostrarRango(Number(rangomin), Number(rangomax))
@@ -64,7 +100,14 @@ router.get('/edad/:rangomin/:rangomax', function (req, res, next) {
 });
 
 /* GET ultimos 5 estudiantes registrados (Nuevo Endpoint) */
-router.get('/ultimos/5', function (req, res, next) {
+router.get('/ultimos/5', 
+
+function(req, res, next){
+  roles = ["admin", "editor"];
+  checkAutenticacion(req, res, next, roles);
+},
+
+function (req, res, next) {
   Estudiantes.mostrarUltimos()
     .then((resultado) => {
       res.status(200).json({ "status": 200, "data": resultado })
@@ -75,7 +118,14 @@ router.get('/ultimos/5', function (req, res, next) {
 });
 
 /* PUT Estudiantes */
-router.put('/:id', function (req, res, next) {
+router.put('/:id', 
+
+function(req, res, next){
+  roles = ["editor"];
+  checkAutenticacion(req, res, next, roles);
+},
+
+function (req, res, next) {
   const { id } = req.params
 
   Estudiantes.editar(req.body, id)
@@ -88,7 +138,14 @@ router.put('/:id', function (req, res, next) {
 })
 
 /* DELETE Estudiantes */
-router.delete('/:id', function (req, res, next) {
+router.delete('/:id', 
+
+function(req, res, next){
+  roles = ["editor"];
+  checkAutenticacion(req, res, next, roles);
+},
+
+function (req, res, next) {
 
   const { id } = req.params
 
