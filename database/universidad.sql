@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 26-12-2023 a las 16:49:38
+-- Tiempo de generación: 31-12-2023 a las 14:10:47
 -- Versión del servidor: 10.4.25-MariaDB
 -- Versión de PHP: 8.1.10
 
@@ -48,6 +48,27 @@ INSERT INTO `estudiantes` (`id`, `nombre`, `edad`, `carrera`) VALUES
 (10, 'Sofia Torres', 19, 'Ingeniería Civil'),
 (11, 'Estefanni Torres', 25, 'Ingeniería Civil');
 
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `usuarios`
+--
+
+CREATE TABLE `usuarios` (
+  `id` int(11) NOT NULL,
+  `usuario` varchar(200) COLLATE utf8_spanish2_ci NOT NULL,
+  `password` varchar(1000) COLLATE utf8_spanish2_ci NOT NULL,
+  `rol` varchar(200) COLLATE utf8_spanish2_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci;
+
+--
+-- Volcado de datos para la tabla `usuarios`
+--
+
+INSERT INTO `usuarios` (`id`, `usuario`, `password`, `rol`) VALUES
+(1, 'luis26', '$2b$10$D8HEu3QyLzQZE6fQJfwsK.SYKoxYiXC3l/dNezjFWDErTarGakUI2', 'admin'),
+(2, 'luis25', '$2b$10$GCbjuMYA16d7PBxN1Nq6RuFKMVcmzw6asJzal8U8yEcJtIettM4wq', 'editor');
+
 --
 -- Índices para tablas volcadas
 --
@@ -59,6 +80,12 @@ ALTER TABLE `estudiantes`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indices de la tabla `usuarios`
+--
+ALTER TABLE `usuarios`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- AUTO_INCREMENT de las tablas volcadas
 --
 
@@ -67,6 +94,12 @@ ALTER TABLE `estudiantes`
 --
 ALTER TABLE `estudiantes`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+
+--
+-- AUTO_INCREMENT de la tabla `usuarios`
+--
+ALTER TABLE `usuarios`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
